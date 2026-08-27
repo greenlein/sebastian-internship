@@ -13280,6 +13280,7 @@ a.read_more i {
 }
 
 .author_list {
+  height: 220px;
   -moz-column-count: 4;
   -moz-column-gap: 20px;
   -webkit-column-count: 4;
