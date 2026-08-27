@@ -7,28 +7,9 @@ import { useState, useEffect } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import sliderSettings from "../UI/sliderSettings";
 
 const HotCollections = () => {
-  const carouselSettings = {
-    className: "owl-theme",
-    items: 4,
-    loop: true,
-    margin: 10,
-    dots: false,
-    nav: true,
-    responsive: {
-      0: {
-        items: 1, // 1 item shown on mobile screens (0px and up)
-      },
-      600: {
-        items: 2, // 2 items shown on tablets (600px and up)
-      },
-      1000: {
-        items: 4, // 4 items shown on desktops (1000px and up)
-      },
-    },
-  };
-
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -92,12 +73,12 @@ const HotCollections = () => {
               </div>
             ))}
 
-          {nfts.length && (
-            <OwlCarousel {...carouselSettings}>
+          {nfts.length > 0 && (
+            <OwlCarousel {...sliderSettings}>
               {nfts.map((nft) => (
                 <div className="nft_coll" key={nft.id}>
                   <div className="nft_wrap">
-                    <Link to="/item-details">
+                    <Link to={`/item-details/${nft.nftId}`}>
                       <img
                         src={nft.nftImage}
                         className="lazy img-fluid"
@@ -106,7 +87,7 @@ const HotCollections = () => {
                     </Link>
                   </div>
                   <div className="nft_coll_pp">
-                    <Link to="/author">
+                    <Link to={`/author/${nft.authorId}`}>
                       <img
                         className="lazy pp-coll"
                         src={nft.authorImage}
