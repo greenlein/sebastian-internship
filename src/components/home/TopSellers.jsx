@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
 
 const TopSellers = () => {
   const [nfts, setNfts] = useState([]);
@@ -21,11 +24,16 @@ const TopSellers = () => {
     fetchData();
   }, []);
 
-  return ( 
+  return (
     <section id="section-popular" className="pb-5">
       <div className="container">
         <div className="row">
-          <div className="col-lg-12">
+          <div
+            className="col-lg-12"
+            data-aos="fade-in"
+            data-aos-delay="0"
+            data-aos-duration="1000"
+          >
             <div className="text-center">
               <h2>Top Sellers</h2>
               <div className="small-border bg-color-2"></div>
