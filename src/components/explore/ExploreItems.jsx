@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import CountdownRenderer from "../UI/CountdownRenderer";
 import axios from "axios";
 
@@ -11,13 +9,17 @@ const ExploreItems = () => {
   const [loadCounter, setLoadCounter] = useState(8);
   const [sortOption, setSortOption] = useState();
 
-  async function fetchNfts() {
-    const { data } = await axios.get(
-      `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore${sortOption ? "?filter=" + sortOption : ""}`,
-    );
-    setNfts(data);
-    setLoading(false);
-  }
+  useEffect(() => {
+    async function fetchNfts() {
+      const { data } = await axios.get(
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore${sortOption ? "?filter=" + sortOption : ""}`,
+      );
+      setNfts(data);
+      setLoading(false);
+    }
+    setLoading(true);
+    fetchNfts();
+  }, [sortOption]);
 
   function handleSort(event) {
     setSortOption(event.target.value);
@@ -27,15 +29,6 @@ const ExploreItems = () => {
     event.preventDefault(); // Prevents page reload if using a Link tag
     setLoadCounter((prevCount) => prevCount + 4);
   }
-
-  useEffect(() => {
-    setLoading(true);
-    fetchNfts();
-  }, [sortOption]);
-
-  useEffect(() => {
-    fetchNfts();
-  }, []);
 
   return (
     <>
@@ -124,13 +117,13 @@ const ExploreItems = () => {
                     <button>Buy Now</button>
                     <div className="nft__item_share">
                       <h4>Share</h4>
-                      <a href="" target="_blank" rel="noreferrer">
+                      <a href="/" target="_blank" rel="noreferrer" alt="">
                         <i className="fa fa-facebook fa-lg"></i>
                       </a>
-                      <a href="" target="_blank" rel="noreferrer">
+                      <a href="/" target="_blank" rel="noreferrer" alt="">
                         <i className="fa fa-twitter fa-lg"></i>
                       </a>
-                      <a href="">
+                      <a href="/" alt="">
                         <i className="fa fa-envelope fa-lg"></i>
                       </a>
                     </div>

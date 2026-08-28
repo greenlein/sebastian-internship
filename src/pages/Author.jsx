@@ -9,16 +9,17 @@ import axios from "axios";
 const Author = () => {
   const { authorId } = useParams();
   const [author, setAuthor] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [addFollow, setAddFollow] = useState(0);
 
-  async function fetchData() {
-    const { data } = await axios.get(
-      `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
-    );
-    setAuthor(data);
-    setLoading(false);
-  }
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await axios.get(
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
+      );
+      setAuthor(data);
+    }
+    fetchData();
+  }, [authorId]);
 
   function handleFollow(event) {
     event.preventDefault();
@@ -28,10 +29,6 @@ const Author = () => {
       setAddFollow(0);
     }
   }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <div id="wrapper">

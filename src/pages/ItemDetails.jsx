@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from "react";
 import EthImage from "../images/ethereum.svg";
 import { Link, useParams } from "react-router-dom";
-import AuthorImage from "../images/author_thumbnail.jpg";
-import nftImage from "../images/nftImage.jpg";
 import axios from "axios";
-
 
 const ItemDetails = () => {
   const { nftId } = useParams();
   const [nft, setNft] = useState({});
   const [loading, setLoading] = useState(true);
 
-  async function fetchNft() {
-    const { data } = await axios.get(
-      `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${nftId}`,
-    );
-    setLoading(false);
-    setNft(data);
-  }
-
   useEffect(() => {
+    async function fetchNft() {
+      const { data } = await axios.get(
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${nftId}`,
+      );
+      setLoading(false);
+      setNft(data);
+    }
+
     window.scrollTo(0, 0);
     setLoading(true);
     fetchNft();
-  }, []);
+  }, [nftId]);
 
   return (
     <div id="wrapper">
@@ -40,7 +37,7 @@ const ItemDetails = () => {
                   ></div>
                   <div className="col-md-6">
                     <div className="item_info">
-                      <h2 className="skeleton-box"></h2>
+                      <div className="skeleton-box"></div>
                       <div className="item_info_counts">
                         <div
                           className="item_info_views skeleton-box"

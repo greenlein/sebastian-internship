@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -17,15 +15,15 @@ const NewItems = () => {
   const [loading, setLoading] = useState(true);
   const [nfts, setNfts] = useState([]);
 
-  async function fetchData() {
-    const { data } = await axios.get(
-      `https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems`,
-    );
-    setNfts(data);
-    setLoading(false);
-  }
-
   useEffect(() => {
+    async function fetchData() {
+      const { data } = await axios.get(
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems`,
+      );
+      setNfts(data);
+      setLoading(false);
+    }
+
     fetchData();
   }, []);
 
@@ -93,9 +91,9 @@ const NewItems = () => {
                       <button>Buy Now</button>
                       <div className="nft__item_share">
                         <h4>Share</h4>
-                        <a href="" target="_blank" rel="noreferrer"></a>
-                        <a href="" target="_blank" rel="noreferrer"></a>
-                        <a href=""></a>
+                        {/* <a href="/" target="_blank" rel="noreferrer" alt=""></a>
+                        <a href="/" target="_blank" rel="noreferrer" alt=""></a>
+                        <a href="/" alt=""></a> */}
                       </div>
                     </div>
                   </div>
@@ -153,13 +151,13 @@ const NewItems = () => {
                           <button>Buy Now</button>
                           <div className="nft__item_share">
                             <h4>Share</h4>
-                            <a href="" target="_blank" rel="noreferrer">
+                            <a href="/" target="_blank" rel="noreferrer" alt="">
                               <i className="fa fa-facebook fa-lg"></i>
                             </a>
-                            <a href="" target="_blank" rel="noreferrer">
+                            <a href="/" target="_blank" rel="noreferrer" alt="">
                               <i className="fa fa-twitter fa-lg"></i>
                             </a>
-                            <a href="">
+                            <a href="/" alt="">
                               <i className="fa fa-envelope fa-lg"></i>
                             </a>
                           </div>
