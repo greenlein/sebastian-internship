@@ -9,6 +9,9 @@ import sliderSettings from "../UI/sliderSettings";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import CountdownRenderer from "../UI/CountdownRenderer";
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
 
 const NewItems = () => {
   const [loading, setLoading] = useState(true);
@@ -27,7 +30,13 @@ const NewItems = () => {
   }, []);
 
   return (
-    <section id="section-items" className="no-bottom">
+    <section
+      id="section-items"
+      className="no-bottom"
+      data-aos="fade-in"
+      data-aos-delay="0"
+      data-aos-duration="1000"
+    >
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
